@@ -90,11 +90,21 @@ POST orders/:order_id/refund
 - [CRUD, Verbs, and Actions](https://guides.rubyonrails.org/routing.html#crud-verbs-and-actions)
 - [RailsConf 2017: In Relentless Pursuit of REST by Derek Prior](https://www.youtube.com/watch?v=HctYHe-YjnE)
 
+## Teste de Software
 ### Quais tipos de teste escrever
 
 - Use request specs para testar controllers, [não use controller specs](http://rspec.info/blog/2016/07/rspec-3-5-has-been-released/).
+- Não criar mais `feature test`, o custo-benefício deles não está valendo a pena. Temos a intenção de voltar com eles, em um "pipeline" a parte, e com cenários mais complexos e frequentes do uso da aplicação
 
-PS: Não devemos mais utilizar Feature test, nem Controller test.
+### Como testar
+
+- Os testes de request devem testar o sistema de forma integrada, portanto evitar mocks
+- Os testes de services devem ser unitários
+
+### Uso de mocks
+
+- Quando a intenção do teste é ser unitário, se faz necessário mockar as dependências, para tanto garantir o teste a nível da unidade, como para melhorar a performance de tais testes. Sendo que ao usar factories, devem ser usado o método `build_stubbed`
+
 
 ### Factories
 
