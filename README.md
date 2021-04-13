@@ -2,7 +2,7 @@
 
 Este playbook tem como objetivo trazer opiniões e abordagens que estamos usando para desenvolver o Billimatic.
 
-Tais opiniões e abordagens são definidas em conjunto com o time, e representam o estado atual do que decidimos, e estão sujeitas a serem revistas no futuro.
+Tais opiniões e abordagens são definidas em conjunto com o time, representam o estado atual do que decidimos e estão sujeitas a serem revistas no futuro.
 
 ## Princípios
 
