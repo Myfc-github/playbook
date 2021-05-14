@@ -113,3 +113,39 @@ POST orders/:order_id/refund
 As factories devem sempre preencher o mínimo de informações necessárias para criar um objeto válido, nunca um objeto com todos os dados possíveis. 
 
 Podem chegar vários bugs em produção, pois a factory preenche todos os campos no teste, mas em produção chegam campos `nil` que quebram as views por exemplo.
+
+### Use let ou let!
+Quando você tiver que atribuir uma variável, no lugar de criar uma variavel de instancia dentro de um before, use let. Assim, permitindo que a variável use lazy load apenas quando for usada pela primeira vez no teste e seja armazenada em cache até que o teste específico seja concluído. 
+
+Exemplo:
+```
+let(:payment_information) { FactoryGirl.create(:payment_information) }
+let(:receivables) do
+  [
+    FactoryGirl.create(:receivable, :with_boleto_cobrato),
+    FactoryGirl.create(:receivable),
+  ]
+end
+let(:invoice) { FactoryGirl.create(:invoice, :received, payment_information: payment_information, receivables: receivables) }
+```
+
+Mais detalhes: 
+- [Better specs lets](https://www.betterspecs.org/#let)
+- [when-to-use-rspec-let](https://stackoverflow.com/questions/5359558/when-to-use-rspec-let/5359979#5359979)
+
+### Use context
+Para deixar melhor organizado o codigo e mais claro. Sempre começar com "when", "with" ou "without", exceto casos onde o contexto é aninhado. Aninhar no maximo 2 contextos.
+
+Exemplo:
+```
+context "when invoice is received" do 
+```
+
+### Use subject
+Sempre que um teste chamar varias vezes o mesmo subject, seja uma classe ou função, deve ser usado subject. [DRY](https://www.infoq.com/br/news/2012/07/DRY-acoplamento-duplicacao/)
+
+Exemplo:
+```
+subject { assigns('message') }
+it { is_expected.to match /it was born in Billville/ }
+```
