@@ -27,9 +27,9 @@ Um dos principais desafios que temos em nossos projetos Rails é saber onde colo
 
 ### Boas práticas na criação de controllers
 
-* um controller deve ter poucas linhas e a responsabilidade de apenas lidar com o comportamento para a view
-* ele deve ser comunicar com Form Objects, Presenters e Services, toda comunicação para uma outra camada pode ser encarada como um "code smell". Uma exceção comum a essa regra são controllers que fazem o clássico CRUD do Rails, nestes casos não vemos problema de realizar a comunicação direta com o Model e [keep it simple](https://en.wikipedia.org/wiki/KISS_principle)
-* se houver a necessidade de criar métodos privados dentro do controller, é mais um code smell, que o controller está começando a ter uma responsabilidade que não deveria ser dele. Uma solução comum, é criar um Service, que são detalhados abaixo
+* Deve ter poucas linhas e a responsabilidade de apenas lidar com o comportamento para a view.
+* Deve se comunicar com Form Objects, Presenters e Services, toda comunicação para uma outra camada pode ser encarada como um "code smell". Uma exceção comum a essa regra são controllers que fazem o clássico CRUD do Rails. Nestes casos, não vemos problema de realizar a comunicação direta com o Model. [Keep it simple.](https://en.wikipedia.org/wiki/KISS_principle)
+* Se houver a necessidade de criar métodos privados dentro do controller, é mais um code smell. O controller está começando a ter uma responsabilidade que não deveria ser dele. Uma solução comum, é criar um Service, que são detalhados abaixo.
 
 ### Onde colocar classes e modulos que não são models, views ou controllers?
 
