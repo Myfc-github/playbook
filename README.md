@@ -24,6 +24,13 @@ Algumas referências que usamos para nos ajudar a criar esse playbook:
 
 Um dos principais desafios que temos em nossos projetos Rails é saber onde colocar o código e como nomear as classes e módulos. Abaixo uma referência com as principais dúvidas que temos para que possamos padronizar nossos projetos e minimizar as dúvidas.
 
+
+### Boas práticas na criação de controllers
+
+* Deve ter poucas linhas e a responsabilidade de apenas lidar com o comportamento para a view.
+* Deve se comunicar com Form Objects, Presenters e Services, toda comunicação para uma outra camada pode ser encarada como um "code smell". Uma exceção comum a essa regra são controllers que fazem o clássico CRUD do Rails. Nestes casos, não vemos problema de realizar a comunicação direta com o Model. [Keep it simple.](https://en.wikipedia.org/wiki/KISS_principle)
+* Se houver a necessidade de criar métodos privados dentro do controller, é mais um code smell. O controller está começando a ter uma responsabilidade que não deveria ser dele. Uma solução comum, é criar um Service, que são detalhados abaixo.
+
 ### Onde colocar classes e modulos que não são models, views ou controllers?
 
 - `app/concerns`: Não é uma boa prática, apenas fragmenta o código. Tentar evitar ao máximo.
@@ -31,7 +38,9 @@ Um dos principais desafios que temos em nossos projetos Rails é saber onde colo
 
 #### app/services/
 
-A maior parte dos artigos sobre organização de código em Rails sugere que seja colocado em services todo código que não se encaixa em `models`, `views` ou `controllers`, uma definição fácil de entender é a seguinte:
+Quando uma aplicação Rails cresce, e para evitar os anti-patterns [Fat Model e Fat Controller](https://blog.appsignal.com/2020/08/05/introduction-to-ruby-on-rails-patterns-and-anti-patterns.html), uma das abordagens mais difundida na comunidade é criação de uma camada de Services.
+
+Uma definição fácil de entender é a seguinte:
 
 > Service Object implements the user’s interactions with the application
 
@@ -46,6 +55,10 @@ A maior parte dos artigos sobre organização de código em Rails sugere que sej
 - [Domain Driven Rails by Yan Pritzker](https://vimeo.com/106759024). [slides da palestra](https://speakerdeck.com/skwp/domain-driven-rails).
 - [Service Objects](http://railscasts.com/episodes/398-service-objects) para ver as vantages de remover o código de models e controllers e criar services.
 - [Rails Service Objects: A Comprehensive Guide](https://www.toptal.com/ruby-on-rails/rails-service-objects-tutorial).
+
+**Trade-offs**
+
+Como mencionado [aqui](https://www.codewithjason.com/rails-service-objects/) e [aqui](https://avdi.codes/service-objects/), há alguns pontos contra o uso de Services, o principal que direciona para um código procedural. No nosso entender, o uso de uma camada de Services é um primeiro passo de evolução do código, que melhora a manutenção, os testes e é simples o suficiente para ser entendido e aplicado. Por isso em resumo, oferece um bom custo-benefício.
 
 ## Boas práticas
 
